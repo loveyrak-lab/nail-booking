@@ -16,4 +16,5 @@ public class SalonService {
     private int basePriceThb;
     private int baseMinutes;
     private boolean active;
+    private boolean allowsArtLevel;
 }

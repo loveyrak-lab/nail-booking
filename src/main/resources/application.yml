@@ -11,3 +11,12 @@ spring:
       ddl-auto: validate
   flyway:
     enabled: true
+    
+salon:
+  open-time: "09:00"
+  close-time: "22:00"
+  last-start-time: "21:30"
+  slot-minutes: 30
+  buffer-minutes: 15
+  lead-minutes: 30
+  max-days-ahead: 30
