@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: nail-booking
+  datasource:
+    url: jdbc:postgresql://localhost:5432/nailbooking
+    username: nail
+    password: nail_dev_pw
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true

@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: nail-booking-db
+    environment:
+      POSTGRES_DB: nailbooking
+      POSTGRES_USER: nail
+      POSTGRES_PASSWORD: nail_dev_pw
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
