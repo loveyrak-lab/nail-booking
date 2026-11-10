@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Perfect Nails หลังร้าน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf3fb;--surface:#fff;--lav:#e3d6f7;--lav-d:#b79be0;--pink:#fbd0e4;--pink-d:#f08fbb;--plum:#4b2a60;--ink:#3a2349;--muted:#7d6890;--line:#eadcf3;--off:#f1eaf6;--ok:#4d8f72;--bad:#b3374f}
+@media (prefers-color-scheme:dark){:root{--bg:#1d1526;--surface:#2a2036;--lav:#463663;--lav-d:#a98bd8;--pink:#5a2d49;--pink-d:#f08fbb;--plum:#f4d9ec;--ink:#f3e8f7;--muted:#b9a5c9;--line:#3d2f4d;--off:#352a44;--ok:#8cc7a8;--bad:#ff8fa3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans Thai",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:520px;margin:0 auto;padding:20px 18px 80px}
+h1,h2,h3{font-family:"Prompt","IBM Plex Sans Thai",sans-serif;margin:0}
+h1{font-size:24px;color:var(--plum)}
+.sub{margin:2px 0 0;color:var(--muted);font-size:14px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--lav-d);outline-offset:2px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.ref{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:500;white-space:nowrap}
+.days{display:flex;gap:8px;overflow-x:auto;padding:16px 2px 6px;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.day{flex:0 0 62px;padding:9px 0;border-radius:30px 30px 14px 14px;background:var(--surface);border:1.5px solid var(--line);text-align:center;position:relative}
+.day span{display:block;font-size:12px;color:var(--muted)}
+.day b{font-family:"Prompt",sans-serif;font-size:19px;font-weight:600}
+.day[aria-pressed="true"]{background:linear-gradient(170deg,var(--pink),var(--lav));border-color:var(--lav-d)}
+.day i{position:absolute;top:-6px;right:-2px;min-width:22px;height:22px;border-radius:11px;background:var(--plum);color:var(--bg);font:600 12px/22px "Prompt",sans-serif;font-style:normal;text-align:center;padding:0 5px}
+.sum{margin:12px 0;color:var(--muted);font-size:14px}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:14px 16px;margin-bottom:10px}
+.card.block{background:var(--off);border-style:dashed}
+.row1{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.time{font-family:"Prompt",sans-serif;font-weight:600;font-size:18px;color:var(--plum);font-variant-numeric:tabular-nums}
+.price{font-weight:600;font-size:14px;color:var(--plum)}
+.name{font-weight:600;margin-top:2px}
+.tel{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:7px 14px;border-radius:999px;background:var(--lav);color:var(--plum);font-weight:600;font-size:15px;text-decoration:none}
+.items{margin:8px 0 0;font-size:15px}
+.note{margin:8px 0 0;padding:8px 12px;border-radius:12px;background:var(--bg);font-size:14px;color:var(--muted)}
+.act{margin-top:10px;display:flex;gap:8px;justify-content:flex-end}
+.btn{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;font-size:14px;font-weight:500}
+.btn.danger{border-color:var(--bad);color:var(--bad)}
+.btn.sure{background:var(--bad);color:#fff;border-color:var(--bad)}
+.pics{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pics img{width:72px;height:72px;object-fit:cover;border-radius:12px;border:1.5px solid var(--line);cursor:zoom-in;background:var(--off)}
+.lb{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:rgba(20,10,30,.88);padding:16px}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:100%;border-radius:14px}
+.lb button{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#222;font-size:20px}
+.empty{padding:28px 16px;text-align:center;color:var(--muted);background:var(--surface);border:1.5px dashed var(--line);border-radius:20px}
+.msg{margin:10px 0;padding:12px 14px;border-radius:14px;background:var(--off);font-size:14px}
+.msg.err{color:var(--bad)}
+.blockbox{margin-top:24px;padding:16px;border-radius:20px;background:var(--surface);border:1.5px solid var(--line)}
+.blockbox h3{font-size:17px;color:var(--plum)}
+.blockbox p{margin:2px 0 12px;font-size:14px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid label{display:block;font-size:14px;color:var(--muted)}
+.grid input,.grid select,.blockbox input[type=text]{width:100%;padding:11px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.full{grid-column:1/-1}
+.dwrap{position:relative;display:flex;gap:6px}
+.dwrap input[type=text]{flex:1;min-width:0}
+.cal{border:1.5px solid var(--line);background:var(--bg);border-radius:12px;padding:0 12px;font-size:18px}
+.hid{position:absolute;left:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.grid label[for]{display:block;font-size:14px;color:var(--muted)}
+.go{margin-top:12px;width:100%;padding:13px;border-radius:999px;border:0;background:var(--plum);color:var(--bg);font-weight:600}
+.go:disabled{opacity:.5}
+.quick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.chip{padding:7px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div><h1>Perfect Nails</h1><p class="sub">หน้าสำหรับช่าง · ดูคิวและปิดเวลา</p></div>
+    <button class="ref" id="ref">รีเฟรช</button>
+  </div>
+  <div class="days" id="days" role="group" aria-label="เลือกวัน"></div>
+  <p class="sum" id="sum"></p>
+  <div id="list"></div>
+
+  <div class="blockbox">
+    <h3>ปิดเวลา (พัก / วันหยุด)</h3>
+    <p>ลูกค้าจะเลือกจองช่วงที่ปิดไม่ได้</p>
+    <div class="quick">
+      <button class="chip" data-s="12:00" data-e="13:00" data-n="พักกลางวัน">พักกลางวัน 12:00–13:00</button>
+      <button class="chip" data-s="09:00" data-e="22:00" data-n="ร้านหยุด">ปิดทั้งวัน</button>
+    </div>
+    <div class="grid">
+      <div>
+        <label for="bdt">วันที่ (วัน/เดือน/ปี)</label>
+        <div class="dwrap"><input type="text" id="bdt" inputmode="numeric" maxlength="10" placeholder="วว/ดด/ปปปป" autocomplete="off"><button type="button" class="cal" id="calBtn" aria-label="เปิดปฏิทิน">📅</button><input type="date" id="bdp" class="hid" tabindex="-1" aria-hidden="true"></div>
+      </div>
+      <span></span>
+      <label>เริ่ม<input type="time" id="bs" value="12:00"></label>
+      <label>ถึง<input type="time" id="be" value="13:00"></label>
+      <label class="full">หมายเหตุ (ไม่บังคับ)<input type="text" id="bn" maxlength="100"></label>
+    </div>
+    <button class="go" id="bgo">ปิดเวลานี้</button>
+    <div id="bmsg"></div>
+  </div>
+</div>
+<div class="lb" id="lb"><button type="button" id="lbx" aria-label="ปิดรูป">✕</button><img id="lbi" alt="รูปเรฟขยาย"></div>
+<script>
+var API="/api/staff";
+var TH=["อา","จ","อ","พ","พฤ","ศ","ส"],MON=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+var THFULL=["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์"];
+var N=14,days=[],sel=0,rows=[],pendingCancel=null,loadErr="";
+function $(i){return document.getElementById(i)}
+function pad(n){return (n<10?"0":"")+n}
+function iso(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+var t0=new Date();for(var i=0;i<N;i++)days.push(new Date(t0.getFullYear(),t0.getMonth(),t0.getDate()+i));
+function setBlockDate(iso){var p=iso.split("-");$("bdt").value=p[2]+"/"+p[1]+"/"+p[0];$("bdp").value=iso}
+function getBlockDate(){
+  var m=/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec($("bdt").value.trim());
+  if(!m)return null;
+  var d=new Date(+m[3],+m[2]-1,+m[1]);
+  if(d.getFullYear()!==+m[3]||d.getMonth()!==+m[2]-1||d.getDate()!==+m[1])return null;
+  return iso(d);
+}
+$("bdt").oninput=function(){
+  var v=this.value.replace(/\D/g,"").slice(0,8),o=v;
+  if(v.length>4)o=v.slice(0,2)+"/"+v.slice(2,4)+"/"+v.slice(4);
+  else if(v.length>2)o=v.slice(0,2)+"/"+v.slice(2);
+  this.value=o;
+};
+$("calBtn").onclick=function(){
+  var p=$("bdp");p.min=iso(days[0]);
+  try{p.showPicker();}catch(e){
+    $("bdt").focus();
+    showErr($("bmsg"),"เปิดปฏิทินในหน้านี้ไม่ได้ พิมพ์วันที่เป็น วัน/เดือน/ปี แทนได้เลย",false);
+  }
+};
+$("bdp").onchange=function(){if(this.value)setBlockDate(this.value)};
+setBlockDate(iso(days[0]));
+
+function count(d){var k=iso(d);return rows.filter(function(r){return r.date===k&&r.status==="CONFIRMED"}).length}
+function renderDays(){
+  var box=$("days");box.innerHTML="";
+  days.forEach(function(d,i){
+    var b=document.createElement("button");b.className="day";b.setAttribute("aria-pressed",sel===i);
+    var c=count(d);
+    b.innerHTML="<span>"+(i===0?"วันนี้":TH[d.getDay()])+"</span><b>"+d.getDate()+"</b><span>"+MON[d.getMonth()]+"</span>"+(c?"<i>"+c+"</i>":"");
+    b.onclick=function(){sel=i;pendingCancel=null;setBlockDate(iso(days[i]));render()};
+    box.appendChild(b);
+  });
+}
+function renderList(){
+  var k=iso(days[sel]),list=rows.filter(function(r){return r.date===k});
+  var n=list.filter(function(r){return r.status==="CONFIRMED"}).length;
+  $("sum").textContent="วัน"+THFULL[days[sel].getDay()]+"ที่ "+days[sel].getDate()+" "+MON[days[sel].getMonth()]+" · "+(n?n+" คิว":"ยังไม่มีคิว");
+  var box=$("list");box.innerHTML="";
+  if(loadErr){showErr(box,loadErr,true);return}
+  if(!list.length){box.innerHTML="<div class=\"empty\">ยังไม่มีคิวในวันนี้</div>";return}
+  list.forEach(function(r){
+    var c=document.createElement("div"),blocked=r.status==="BLOCKED";
+    c.className="card"+(blocked?" block":"");
+    var h="<div class=\"row1\"><span class=\"time\">"+r.start+"–"+r.end+"</span>";
+    if(!blocked&&r.priceThb!=null)h+="<span class=\"price\">"+(r.priceFrom?"เริ่ม ":"")+r.priceThb.toLocaleString("th-TH")+" บาท</span>";
+    h+="</div>";
+    if(blocked){h+="<div class=\"name\">ปิดเวลา</div>"+(r.note?"<div class=\"items\">"+esc(r.note)+"</div>":"")}
+    else{
+      h+="<div class=\"name\">"+esc(r.name)+(r.lineId?" · LINE "+esc(r.lineId):"")+"</div>";
+      h+="<a class=\"tel\" href=\"tel:"+esc(r.phone)+"\">📞 "+esc(r.phone)+"</a>";
+      h+="<p class=\"items\">"+esc((r.items||[]).join(" + "))+"</p>";
+      if(r.note)h+="<p class=\"note\">ถึงช่าง: "+esc(r.note)+"</p>";
+      if(r.photos&&r.photos.length){
+        h+="<div class=\"pics\" aria-label=\"รูปเรฟ\">"+r.photos.map(function(id,k){return "<img loading=\"lazy\" src=\""+API+"/photos/"+id+"\" data-id=\""+id+"\" alt=\"รูปเรฟที่ "+(k+1)+"\">"}).join("")+"</div>";
+      }
+    }
+    h+="<div class=\"act\"></div>";
+    c.innerHTML=h;
+    var act=c.querySelector(".act"),b=document.createElement("button");
+    if(pendingCancel===r.id){
+      b.className="btn sure";b.textContent="ยืนยัน"+(blocked?"เปิดเวลา":"ยกเลิกคิว");
+      b.onclick=function(){cancel(r.id)};
+      var no=document.createElement("button");no.className="btn";no.textContent="ไม่";
+      no.onclick=function(){pendingCancel=null;renderList()};
+      act.appendChild(no);
+    }else{
+      b.className="btn danger";b.textContent=blocked?"เปิดเวลานี้":"ยกเลิกคิว";
+      b.onclick=function(){pendingCancel=r.id;renderList()};
+    }
+    act.appendChild(b);box.appendChild(c);
+  });
+}
+function render(){renderDays();renderList()}
+function showErr(el,t,err){el.innerHTML="<div class=\"msg"+(err?" err":"")+"\">"+esc(t)+"</div>"}
+function load(){
+  fetch(API+"/bookings?from="+iso(days[0])+"&days="+N).then(function(r){
+    if(r.status===401||r.status===403)throw new Error("auth");
+    if(!r.ok)throw new Error(r.status);return r.json();
+  }).then(function(d){rows=d;loadErr="";render()}).catch(function(e){
+    loadErr=e.message==="auth"?"ยังไม่ได้ล็อกอิน รีเฟรชหน้านี้แล้วกรอกผู้ใช้/รหัสผ่านของช่าง":"โหลดคิวไม่ได้ (เซิร์ฟเวอร์ตอบ "+e.message+") ดูข้อความ Caused by ใน terminal ที่รันแอป";
+    render();
+  });
+}
+function cancel(id){
+  fetch(API+"/bookings/"+id+"/cancel",{method:"POST"}).then(function(r){return r.json().catch(function(){return {}}).then(function(b){return{ok:r.ok,b:b}})}).then(function(x){
+    pendingCancel=null;
+    if(!x.ok)showErr($("sum"),x.b.error||"ทำรายการไม่สำเร็จ",true);
+    load();
+  }).catch(function(){showErr($("sum"),"เชื่อมต่อไม่ได้",true)});
+}
+document.querySelectorAll(".chip").forEach(function(c){c.onclick=function(){$("bs").value=c.dataset.s;$("be").value=c.dataset.e;$("bn").value=c.dataset.n}});
+$("bgo").onclick=function(){
+  var bdate=getBlockDate();
+  if(!bdate){showErr($("bmsg"),"วันที่ไม่ถูกต้อง พิมพ์เป็น วัน/เดือน/ปี เช่น 10/11/2026",true);return}
+  if(bdate<iso(days[0])){showErr($("bmsg"),"ปิดเวลาย้อนหลังไม่ได้ เลือกวันนี้หรือวันข้างหน้า",true);return}
+  var b=$("bgo");b.disabled=true;
+  fetch(API+"/blocks",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({date:bdate,start:$("bs").value,end:$("be").value,note:$("bn").value})})
+  .then(function(r){return r.json().catch(function(){return {}}).then(function(x){return{ok:r.ok,b:x}})}).then(function(x){
+    b.disabled=false;
+    if(x.ok){showErr($("bmsg"),"ปิดเวลาแล้ว",false);$("bn").value="";load()}
+    else showErr($("bmsg"),x.b.error||"ปิดเวลาไม่สำเร็จ",true);
+  }).catch(function(){b.disabled=false;showErr($("bmsg"),"เชื่อมต่อไม่ได้",true)});
+};
+$("list").addEventListener("click",function(e){
+  var im=e.target.closest&&e.target.closest(".pics img");
+  if(im){$("lbi").src=im.src;$("lb").classList.add("on")}
+});
+$("lb").onclick=function(){$("lb").classList.remove("on");$("lbi").removeAttribute("src")};
+$("ref").onclick=load;
+setInterval(load,30000);
+render();load();
+</script>
+</body>
+</html>
