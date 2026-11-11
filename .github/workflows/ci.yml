@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # Database for the default Spring context test (same values as application.yml)
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: nailbooking
+          POSTGRES_USER: nail
+          POSTGRES_PASSWORD: nail_dev_pw
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U nail -d nailbooking"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      # Windows checkouts can lose the executable bit on the Maven wrapper
+      - run: chmod +x mvnw
+
+      # Testcontainers starts its own PostgreSQL; Docker is preinstalled on the runner
+      - run: ./mvnw -B test

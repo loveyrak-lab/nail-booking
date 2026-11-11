@@ -105,11 +105,41 @@ $env:STAFF_PASSWORD="choose-a-password"     # PowerShell
 
 > The database credentials in `docker-compose.yml` and `application.yml` are for local development only. Move them to environment variables or a secrets manager before any real deployment.
 
+## Testing
+
+An integration test starts a throw-away PostgreSQL 16 in Docker (Testcontainers), applies the real Flyway migrations, and proves the database rejects overlapping bookings:
+
+- overlapping time ranges are rejected by the `no_overlap` constraint
+- back-to-back bookings (one ends exactly when the next starts) are allowed
+- a cancelled booking no longer holds its time
+
+Docker must be running. The default Spring context test also needs the local database from `docker compose up -d`.
+
+```bash
+./mvnw test          # Windows PowerShell: .\mvnw test
+```
+
+GitHub Actions runs the same tests on every push (`.github/workflows/ci.yml`).
+
+## Running in a container
+
+```bash
+docker build -t nail-booking .
+docker run -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/nailbooking \
+  -e SPRING_DATASOURCE_USERNAME=nail \
+  -e SPRING_DATASOURCE_PASSWORD=nail_dev_pw \
+  -e STAFF_PASSWORD=choose-a-password \
+  nail-booking
+```
+
+The database settings and staff password are read from environment variables, so no secrets are baked into the image.
+
 ## Known limitations and roadmap
 
-- No automated tests yet. Planned: unit tests for slot calculation and the booking rules, and an integration test for the double-booking constraint using Testcontainers.
+- Test coverage is limited to the double-booking constraint. Planned: unit tests for slot calculation, pricing and the booking rules.
 - Service durations are estimates and still need to be confirmed with the salon.
 - Technician login is a single shared HTTP Basic account.
-- Not yet deployed. A production setup needs environment-based secrets, backups, and HTTPS.
+- Not yet deployed. A Dockerfile is provided; a production setup still needs managed secrets, backups, and HTTPS.
 - No notifications yet (for example a LINE message to the technician when a booking arrives).
 - Photos are stored in the database; object storage would be a better fit at scale.
