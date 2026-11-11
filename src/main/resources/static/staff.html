@@ -85,11 +85,10 @@ button{font:inherit;color:inherit;cursor:pointer}
       <button class="chip" data-s="09:00" data-e="22:00" data-n="ร้านหยุด">ปิดทั้งวัน</button>
     </div>
     <div class="grid">
-      <div>
+      <div class="full">
         <label for="bdt">วันที่ (วัน/เดือน/ปี)</label>
         <div class="dwrap"><input type="text" id="bdt" inputmode="numeric" maxlength="10" placeholder="วว/ดด/ปปปป" autocomplete="off"><button type="button" class="cal" id="calBtn" aria-label="เปิดปฏิทิน">📅</button><input type="date" id="bdp" class="hid" tabindex="-1" aria-hidden="true"></div>
       </div>
-      <span></span>
       <label>เริ่ม<input type="time" id="bs" value="12:00"></label>
       <label>ถึง<input type="time" id="be" value="13:00"></label>
       <label class="full">หมายเหตุ (ไม่บังคับ)<input type="text" id="bn" maxlength="100"></label>
